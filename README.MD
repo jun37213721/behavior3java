@@ -51,7 +51,8 @@ BehaviorTree behaviorTree = behaviorTreeProject.findBTTreeByTitle("b1");//获取
 //该行为树所有数据都存储在blackboard中。
 Blackboard blackboard = new Blackboard();
 //驱动tick
-behaviorTree.tick(new Object(), blackboard);
+Tick tick = new Tick(behaviorTree, blackboard, new Object());
+behaviorTree.tick(tick);
 
 ```
 
