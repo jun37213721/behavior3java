@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.silencesu.behavior3java.util.FileUtil;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,15 +17,13 @@ import java.util.Map;
  * Created by Silence on 2019/3/2.
  */
 public class BevTreeConfig {
-
-
     /**
      * 加载行为树配置
      *
      * @param path
      * @return
      */
-    public static BTTreeCfg LoadTreeCfg(String path) {
+    public static BTTreeCfg LoadTreeCfg(String path) throws IOException {
         BTTreeCfg treeCfg;
         String text = FileUtil.readFile(path);
         treeCfg = JSON.parseObject(text, BTTreeCfg.class);
@@ -36,14 +35,12 @@ public class BevTreeConfig {
      * @param path
      * @return
      */
-    public static List<BTTreeCfg> LoadTreesCfg(String path) {
+    public static List<BTTreeCfg> LoadTreesCfg(String path) throws IOException {
         String text = FileUtil.readFile(path);
         JSONObject jsonObj = JSON.parseObject(text);
         JSONArray trees = jsonObj.getJSONArray("trees");
-        List<BTTreeCfg> list = trees.toJavaList(BTTreeCfg.class);
-        return list;
+        return trees.toJavaList(BTTreeCfg.class);
     }
-
 
     /**
      * 加载整体工程数据
@@ -51,11 +48,10 @@ public class BevTreeConfig {
      * @param path
      * @return
      */
-    public static BTTreeProjectCfg LoadBTTreePorjectCfg(String path) {
+    public static BTTreeProjectCfg LoadBTTreePorjectCfg(String path) throws IOException {
         String json = FileUtil.readFile(path);
         return JSON.parseObject(json, BTTreeProjectCfg.class);
     }
-
 
     /**
      * 获取节点配置的文件
@@ -67,13 +63,10 @@ public class BevTreeConfig {
      */
     @SuppressWarnings("unchecked")
     public <T> T getProperty(BTNodeCfg cfg, String name) {
-
         Map<String, String> props = cfg.getProperties();
         if (props != null) {
             return (T) props.get(name);
         }
         return null;
     }
-
-
 }

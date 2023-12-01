@@ -7,6 +7,7 @@ import com.github.silencesu.behavior3java.core.BaseNode;
 import com.github.silencesu.behavior3java.core.BehaviorTree;
 import com.github.silencesu.behavior3java.core.BehaviorTreeProject;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -17,13 +18,11 @@ import java.util.Map;
  * Created by Silence on 2019/9/20.
  */
 public class B3Loader {
-
-
     /**
      * @param treeJson    行为树配置文件
      * @param extendNodes 自定义扩展结点
      */
-    public static BehaviorTree loadB3Tree(String treeJson, Map<String, Class<? extends BaseNode>> extendNodes) {
+    public static BehaviorTree loadB3Tree(String treeJson, Map<String, Class<? extends BaseNode>> extendNodes) throws IOException, InstantiationException, IllegalAccessException {
 
         //init tree config
         BTTreeCfg btTreeCfg = BevTreeConfig.LoadTreeCfg(treeJson);
@@ -43,16 +42,13 @@ public class B3Loader {
     /**
      * 加载工程
      *
-     * @param projectJson
-     * @param extendNodes
-     * @return
+     * @param projectJson 工程配置文件
+     * @param extendNodes 自定义扩展结点
      */
-    public static BehaviorTreeProject loadB3Project(String projectJson, Map<String, Class<? extends BaseNode>> extendNodes) {
+    public static BehaviorTreeProject loadB3Project(String projectJson, Map<String, Class<? extends BaseNode>> extendNodes) throws IOException, InstantiationException, IllegalAccessException {
         BTTreeProjectCfg projectCfg = BevTreeConfig.LoadBTTreePorjectCfg(projectJson);
         BehaviorTreeProject project = new BehaviorTreeProject();
         project.initProject(projectCfg, extendNodes);
         return project;
     }
-
-
 }

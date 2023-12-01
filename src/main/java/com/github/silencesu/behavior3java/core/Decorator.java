@@ -27,5 +27,4 @@ public abstract class Decorator extends BaseNode implements IDecorator {
     public String getCategory() {
         return B3Const.DECORATOR;
     }
-
 }

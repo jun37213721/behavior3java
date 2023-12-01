@@ -7,10 +7,7 @@ package com.github.silencesu.behavior3java.core;
  * Created by Silence on 2019/3/2.
  */
 public interface IDecorator {
-
-    void  setChild(BaseNode child);
+    void setChild(BaseNode child);
 
     BaseNode getChild();
-
-
 }

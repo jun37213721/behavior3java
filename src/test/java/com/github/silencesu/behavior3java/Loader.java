@@ -1,12 +1,13 @@
 package com.github.silencesu.behavior3java;
 
 import com.github.silencesu.behavior3java.actions.Log;
-import com.github.silencesu.behavior3java.core.BaseNode;
-import com.github.silencesu.behavior3java.core.BehaviorTree;
-import com.github.silencesu.behavior3java.core.BehaviorTreeProject;
-import com.github.silencesu.behavior3java.core.Blackboard;
+import com.github.silencesu.behavior3java.core.*;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ import java.util.Map;
 public class Loader {
 
     //自定义扩展log
-    private static Map<String, Class<? extends BaseNode>> extendNodes = new HashMap<String, Class<? extends BaseNode>>() {
+    private static final Map<String, Class<? extends BaseNode>> extendNodes = new HashMap<String, Class<? extends BaseNode>>() {
         {
             put("Log", Log.class);
         }
@@ -28,21 +29,23 @@ public class Loader {
 
 
     @Test
-    public void loadTree() {
-        String confJson = Loader.class.getResource("/").getPath() + "tree.json";
+    public void loadTree() throws IOException, URISyntaxException, InstantiationException, IllegalAccessException {
+        Path path = Paths.get(Loader.class.getResource("/tree.json").toURI());
+        String confJson = path.toString();
         BehaviorTree behaviorTree = B3Loader.loadB3Tree(confJson, extendNodes);
         Blackboard blackboard = new Blackboard();
-        behaviorTree.tick(new Object(), blackboard);
+        Tick tick = new Tick(behaviorTree, blackboard, new Object());
+        behaviorTree.tick(tick);
     }
 
     @Test
-    public void loadProject() {
-        String confJson = Loader.class.getResource("/").getPath() + "project.b3";
+    public void loadProject() throws IOException, URISyntaxException, InstantiationException, IllegalAccessException {
+        Path path = Paths.get(Loader.class.getResource("/project.b3").toURI());
+        String confJson = path.toString();
         BehaviorTreeProject behaviorTreeProject = B3Loader.loadB3Project(confJson, extendNodes);
         Blackboard blackboard = new Blackboard();
         BehaviorTree behaviorTree = behaviorTreeProject.findBTTreeByTitle("tree1");
-        behaviorTree.tick(new Object(), blackboard);
-
-
+        Tick tick = new Tick(behaviorTree, blackboard, new Object());
+        behaviorTree.tick(tick);
     }
 }

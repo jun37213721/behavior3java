@@ -13,8 +13,7 @@ import java.util.List;
  * Created by Silence on 2019/3/2.
  */
 public abstract class Composite extends BaseNode implements IComposite {
-
-    private List<BaseNode> children = new ArrayList<>();
+    private final List<BaseNode> children = new ArrayList<>();
 
     @Override
     public int getChildCount() {
@@ -36,5 +35,4 @@ public abstract class Composite extends BaseNode implements IComposite {
     public String getCategory() {
         return B3Const.COMPOSITE;
     }
-
 }

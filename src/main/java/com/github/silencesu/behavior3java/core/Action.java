@@ -9,8 +9,6 @@ import com.github.silencesu.behavior3java.constant.B3Const;
  * Created by Silence on 2019/3/2.
  */
 public abstract  class Action extends BaseNode  implements IAction {
-
-
     @Override
     public String getCategory() {
         return B3Const.ACTION;

@@ -14,14 +14,7 @@ import lombok.Setter;
 @Getter
 public class BTTreeProjectCfg {
     private String name;
-
     private String description;
-
     private String scope;
-
-
     private BTTreeProjectDataCfg data;
-
-
-
 }

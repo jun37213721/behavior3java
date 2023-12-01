@@ -10,7 +10,6 @@ import com.github.silencesu.behavior3java.core.Decorator;
  * Created by Silence on 2019/3/2.
  */
 public class Inverter extends Decorator {
-
     @Override
     public B3Status onTick(Tick tick) {
         if (this.getChild() == null) {

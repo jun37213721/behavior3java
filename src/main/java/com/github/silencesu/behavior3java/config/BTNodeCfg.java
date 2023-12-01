@@ -23,7 +23,6 @@ public class BTNodeCfg {
     private String description;
     private List<String> children;
     private String child;
-    private Map<String, String> parameters;
     private Map<String, String> properties;
 
 }

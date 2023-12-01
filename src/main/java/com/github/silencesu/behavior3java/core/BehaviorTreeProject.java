@@ -18,7 +18,6 @@ import java.util.Map;
 @Data
 @Slf4j
 public class BehaviorTreeProject {
-
     /**
      * 工程内的树
      */
@@ -41,9 +40,7 @@ public class BehaviorTreeProject {
      * @param projectCfg  工程配置
      * @param extendNodes 扩展结点
      */
-    public void initProject(BTTreeProjectCfg projectCfg, Map<String, Class<? extends BaseNode>> extendNodes) {
-
-
+    public void initProject(BTTreeProjectCfg projectCfg, Map<String, Class<? extends BaseNode>> extendNodes) throws InstantiationException, IllegalAccessException {
         for (BTTreeCfg treeCfg : projectCfg.getData().getTrees()) {
 
             BehaviorTree behaviorTree = new BehaviorTree();
@@ -52,10 +49,6 @@ public class BehaviorTreeProject {
 
             titleTreeMap.put(treeCfg.getTitle(), behaviorTree);
             idTreeMap.put(treeCfg.getId(), behaviorTree);
-
-
         }
-
-
     }
 }

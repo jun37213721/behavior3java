@@ -13,22 +13,16 @@ import com.github.silencesu.behavior3java.core.Composite;
  * Created by Silence on 2019/3/2.
  */
 public class MemSequence extends Composite {
-
-
     @Override
     public void onOpen(Tick tick) {
-
-        Blackboard.Memory memory = tick.getBlackboard().getMemeory(tick.getTree().getId(), this.getId());
-        memory.getMemeory().put(B3Const.RUNNING_CHILD, 0);
+        Blackboard.TreeMemory.NodeMemory memory = tick.getBlackboard().getNodeMemeory(tick.getTree().getId(), this.getId());
+        memory.getNodeData().put(B3Const.RUNNING_CHILD, 0);
     }
 
     @Override
     public B3Status onTick(Tick tick) {
-
-        Blackboard.Memory mm = tick.getBlackboard().getMemeory(tick.getTree().getId(), this.getId());
-
-        int child = (int) mm.getMemeory().get(B3Const.RUNNING_CHILD);
-
+        Blackboard.TreeMemory.NodeMemory mm = tick.getBlackboard().getNodeMemeory(tick.getTree().getId(), this.getId());
+        int child = (int) mm.getNodeData().get(B3Const.RUNNING_CHILD);
         int childCount = getChildCount();
 
         for (int i = child; i < childCount; i++) {
@@ -36,7 +30,7 @@ public class MemSequence extends Composite {
 
             if (status != B3Status.SUCCESS) {
                 if (status == B3Status.RUNNING) {
-                    tick.getBlackboard().setParam(B3Const.RUNNING_CHILD, i, tick.getTree().getId(), this.getId());
+                    tick.getBlackboard().setNodeMemory(B3Const.RUNNING_CHILD, i, tick.getTree().getId(), this.getId());
                 }
                 return status;
 
@@ -46,5 +40,4 @@ public class MemSequence extends Composite {
 
         return B3Status.SUCCESS;
     }
-
 }

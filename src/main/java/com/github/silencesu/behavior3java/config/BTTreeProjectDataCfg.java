@@ -18,5 +18,4 @@ public class BTTreeProjectDataCfg {
     private String scope;
     private String selectedTree;
     private List<BTTreeCfg> trees = new ArrayList<>();
-
 }

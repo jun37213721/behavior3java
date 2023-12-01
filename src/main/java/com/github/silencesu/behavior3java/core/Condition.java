@@ -9,7 +9,6 @@ import com.github.silencesu.behavior3java.constant.B3Const;
  * Created by Silence on 2019/3/4.
  */
 public abstract class Condition extends BaseNode implements ICondition {
-
     @Override
     public String getCategory() {
         return B3Const.CONDITION;

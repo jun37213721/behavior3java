@@ -25,7 +25,7 @@ public class DefaultNodes {
      * key name
      * value node class
      */
-    private static Map<String, Class<? extends BaseNode>> defaultNodes = new HashMap<>();
+    private static final Map<String, Class<? extends BaseNode>> defaultNodes = new HashMap<>();
 
 
 
@@ -51,9 +51,8 @@ public class DefaultNodes {
         defaultNodes.put("Repeater", Repeater.class);
         defaultNodes.put("RepeatUntilFailure", RepeatUntilFailure.class);
         defaultNodes.put("RepeatUntilSuccess", RepeatUntilSuccess.class);
-
-
     }
+
     /**
      * 扩充Nodes节点
      */
@@ -65,5 +64,4 @@ public class DefaultNodes {
     public static Map<String,Class<? extends BaseNode>> get(){
         return defaultNodes;
     }
-
 }

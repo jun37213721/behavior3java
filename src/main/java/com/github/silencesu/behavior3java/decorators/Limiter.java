@@ -18,29 +18,24 @@ public class Limiter extends Decorator {
     public void initialize(BTNodeCfg nodeCfg) {
         super.initialize(nodeCfg);
 
-
         String ml = nodeCfg.getProperties().get(B3Const.MAX_LOOP);
-        maxLoop = Integer.valueOf(ml);
-
+        maxLoop = Integer.parseInt(ml);
     }
 
     @Override
     public void onOpen(Tick tick) {
         super.onOpen(tick);
-        tick.getBlackboard().setParam("i", 0, tick.getTree().getId(), this.getId());
-
+        tick.getBlackboard().setNodeMemory("i", 0, tick.getTree().getId(), this.getId());
     }
 
     @Override
     public B3Status onTick(Tick tick) {
-
-        Integer i = tick.getBlackboard().getParam("i", tick.getTree().getId(), this.getId());
+        int i = tick.getBlackboard().getNodeMemory("i", tick.getTree().getId(), this.getId());
         if (i < this.maxLoop) {
-
             B3Status status = this.getChild().execute(tick);
 
             if (status == B3Status.SUCCESS || B3Status.FAILURE == status) {
-                tick.getBlackboard().setParam("i", i + 1, tick.getTree().getId(), this.getId());
+                tick.getBlackboard().setNodeMemory("i", i + 1, tick.getTree().getId(), this.getId());
             }
             return status;
 
@@ -48,7 +43,5 @@ public class Limiter extends Decorator {
         }
 
         return B3Status.FAILURE;
-
-
     }
 }
