@@ -19,7 +19,7 @@
 但是此时工程文件与导出project json 格式是不一样的。
 所以导致报错不兼容，后期会区分加载b3文件与工程json
 
-##### 引用框架
+<!--##### 引用框架
 ```
 <dependency>
   <groupId>com.github.silencesu</groupId>
@@ -28,6 +28,7 @@
 </dependency>
 
 ```
+-->
 
 ##### 独立子树加载
 
